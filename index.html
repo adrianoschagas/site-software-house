@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Saíra Studio</title>
+  <meta name="description" content="Sites, software sob medida, agentes de IA e perfil no Google para a sua empresa.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400..700&family=Gabarito:wght@400..900&family=JetBrains+Mono:wght@400;700&display=swap">
+  <script>
+    // aplica o tema salvo antes da primeira pintura, pra não piscar
+    try { var t = localStorage.getItem('tema'); if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <script type="module" src="/src/main.js"></script>
+</head>
+<body>
+<div class="draft"><b>RASCUNHO</b> · nome, projetos e contatos são provisórios</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio">
+      <svg viewBox="0 0 34 34" aria-hidden="true">
+        <path d="M3 25 C3 13 12 7 21 9 L17 29 Z" fill="var(--green)"/>
+        <path d="M5 25 C8 18 13 16 18 17 L15 27 Z" fill="var(--orange)"/>
+        <path d="M3 25 L0 32 L8 28 Z" fill="var(--blue)"/>
+        <circle cx="22" cy="11" r="7" fill="var(--turq)"/>
+        <path d="M28 9 L34 11.5 L28 14 Z" fill="var(--ink)"/>
+        <circle cx="23.5" cy="10" r="1.5" fill="var(--ink)"/>
+      </svg>
+      saíra
+    </a>
+    <nav class="nav" aria-label="Seções">
+      <a href="#servicos">Serviços</a>
+      <a href="#portfolio">Portfólio</a>
+      <a href="#processo">Como funciona</a>
+      <a href="#duvidas">Dúvidas</a>
+    </nav>
+    <button class="theme" id="theme" type="button" aria-pressed="false" aria-label="Ativar modo escuro">
+      <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><path stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+    </button>
+    <a class="btn go sm" href="#contato">Contar meu projeto</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="inicio">
+    <div class="stars" aria-hidden="true"></div>
+    <canvas id="mata" aria-label="Mata em 3D com rio, ipês e araras. Um helicóptero segue o cursor e um clique planta um ipê."></canvas>
+    <div class="scrim"></div>
+    <div class="wrap hero-in">
+      <div class="hero-txt">
+        <span class="badge"><i></i>Estúdio de software brasileiro</span>
+        <h1>Sites, sistemas e <em>agentes de IA</em> feitos sob medida.</h1>
+        <p class="lede">A gente constrói o que a sua empresa precisa pra vender e trabalhar melhor, da landing page ao agente que atende seus clientes.</p>
+        <div class="cta">
+          <a class="btn go" href="#contato">Contar meu projeto</a>
+          <a class="btn" href="#portfolio">Ver portfólio ↓</a>
+        </div>
+      </div>
+    </div>
+    <p class="hud"><span class="m">Mexa o mouse pra voar · clique pra plantar um ipê</span><span class="t">Toque na mata pra voar e plantar um ipê</span><b id="ipes">0</b></p>
+  </section>
+  <div class="sete" aria-hidden="true"></div>
+
+  <section class="sec" id="servicos">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Serviços</p>
+        <h2>Quatro frentes, um só contato.</h2>
+        <p class="sub">Escolha um serviço e veja ele funcionando. Dá pra contratar um só ou juntar tudo.</p>
+      </div>
+
+      <div class="svc" id="svc" data-on="ia">
+        <div class="tabs" role="tablist" aria-label="Serviços">
+          <button class="tab t-ia" role="tab" id="tab-ia" aria-controls="p-ia" aria-selected="true" data-key="ia" data-title="WhatsApp · Auto Center Rota 9">
+            <span class="ic" aria-hidden="true">IA</span>
+            <b>Agentes de IA pra sua empresa</b>
+            <span class="d">Um assistente treinado no seu negócio, que responde cliente, agenda, consulta seus sistemas e chama uma pessoa quando precisa. <em>Pouca gente oferece.</em></span>
+            <span class="bar" aria-hidden="true"><i></i></span>
+          </button>
+          <button class="tab t-soft" role="tab" id="tab-soft" aria-controls="p-soft" aria-selected="false" tabindex="-1" data-key="soft" data-title="Painel · Distribuidora Serra Azul">
+            <span class="ic" aria-hidden="true">{ }</span>
+            <b>Software sob medida</b>
+            <span class="d">Sistemas web, painéis e automações desenhados pro seu processo, no lugar da planilha que já não dá conta.</span>
+            <span class="bar" aria-hidden="true"><i></i></span>
+          </button>
+          <button class="tab t-site" role="tab" id="tab-site" aria-controls="p-site" aria-selected="false" tabindex="-1" data-key="site" data-title="Navegador · suaempresa.com.br">
+            <span class="ic" aria-hidden="true">www</span>
+            <b>Landing pages e sites</b>
+            <span class="d">Páginas rápidas, bonitas no celular e feitas pra converter. O código fica no seu GitHub, não preso numa plataforma.</span>
+            <span class="bar" aria-hidden="true"><i></i></span>
+          </button>
+          <button class="tab t-google" role="tab" id="tab-google" aria-controls="p-google" aria-selected="false" tabindex="-1" data-key="google" data-title="Perfil da Empresa · Padaria Estrela">
+            <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg></span>
+            <b>Sua empresa bem cadastrada no Google</b>
+            <span class="d">Otimização do Perfil da Empresa no Google, o antigo Google Meu Negócio, pra você aparecer certo na busca e no Maps.</span>
+            <span class="bar" aria-hidden="true"><i></i></span>
+          </button>
+        </div>
+
+        <div class="win">
+          <div class="wbar">
+            <span class="wdots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="wtitle" id="wtitle">WhatsApp · Auto Center Rota 9</span>
+            <span class="wtag">demonstração</span>
+            <button id="again" type="button">↻ Ver de novo</button>
+          </div>
+
+          <div class="stage chatwin" id="p-ia" role="tabpanel" aria-labelledby="tab-ia">
+            <p class="msg c" data-s="1">Vocês fazem revisão de câmbio automático?</p>
+            <p class="typing" data-s="2" data-u="3" aria-hidden="true"><i></i><i></i><i></i></p>
+            <p class="chipline" data-s="3"><i></i>Consultou a tabela de preços · 1 s</p>
+            <p class="msg a" data-s="4">Fazemos! Leva meio dia e sai a partir de R$ 380. Quer que eu veja um horário esta semana?</p>
+            <p class="msg c" data-s="5">Quinta de manhã</p>
+            <p class="typing" data-s="6" data-u="7" aria-hidden="true"><i></i><i></i><i></i></p>
+            <p class="chipline" data-s="7"><i></i>Consultou a agenda · reservou o horário · 2 s</p>
+            <div class="okcard" data-s="8"><small>✓ Agendado</small><b>Revisão de câmbio</b> · quinta, 9h</div>
+            <p class="msg a" data-s="9">Reservado! Já avisei a oficina e te mando um lembrete na véspera.</p>
+            <p class="receipt" data-s="10">resolvido em 38 s · às 22h14 · equipe avisada</p>
+          </div>
+
+          <div class="stage" id="p-soft" role="tabpanel" aria-labelledby="tab-soft" hidden>
+            <div class="tiles">
+              <div class="tile"><small>Pedidos hoje</small><b class="k" data-s="0" data-count="42">42</b></div>
+              <div class="tile"><small>Em rota</small><b class="k" data-s="0" data-count="7">7</b></div>
+              <div class="tile"><small>Faturado</small><b class="k" data-s="0" data-count="8640" data-pre="R$ ">R$ 8.640</b></div>
+            </div>
+            <ul class="orders">
+              <li data-s="5"><span>#1043 · Padaria Estrela</span><span class="pill s0">Novo</span></li>
+              <li><span>#1042 · Mercado Bom Dia</span><span class="stack"><span class="pill s0" data-s="0" data-u="2">Novo</span><span class="pill s1" data-s="2" data-u="6">Em separação</span><span class="pill s2" data-s="6">Saiu pra entrega</span></span></li>
+              <li><span>#1041 · Lanchonete do Zé</span><span class="stack"><span class="pill s1" data-s="0" data-u="3">Em separação</span><span class="pill s2" data-s="3" data-u="7">Saiu pra entrega</span><span class="pill s3" data-s="7">Entregue</span></span></li>
+              <li><span>#1040 · Empório Serra</span><span class="stack"><span class="pill s2" data-s="0" data-u="4">Saiu pra entrega</span><span class="pill s3" data-s="4">Entregue</span></span></li>
+            </ul>
+            <p class="toast" data-s="8">✓ Cliente avisado no WhatsApp: “seu pedido saiu pra entrega”</p>
+          </div>
+
+          <div class="stage" id="p-site" role="tabpanel" aria-labelledby="tab-site" hidden>
+            <div class="browser">
+              <div class="url"><i></i>suaempresa.com.br</div>
+              <div class="page" aria-hidden="true">
+                <div class="mn k" data-s="1"><i></i><i></i></div>
+                <i class="mh k" data-s="2"></i><i class="mp k" data-s="2"></i>
+                <i class="mb k" data-s="3"></i>
+                <div class="mg"><i class="k" data-s="4"></i><i class="k" data-s="5"></i><i class="k" data-s="6"></i></div>
+              </div>
+            </div>
+            <div class="scores k" data-s="7">
+              <div class="score"><b data-count="98">98</b><small>Desempenho</small></div>
+              <div class="score"><b data-count="100">100</b><small>Acessibilidade</small></div>
+              <div class="score"><b data-count="100">100</b><small>Boas práticas</small></div>
+              <div class="score"><b data-count="100">100</b><small>SEO</small></div>
+            </div>
+            <p class="chipline" data-s="8"><i></i>Publicado · código em github.com/suaempresa/site</p>
+          </div>
+
+          <div class="stage" id="p-google" role="tabpanel" aria-labelledby="tab-google" hidden>
+            <div class="gcard">
+              <div class="ghead"><b>Padaria Estrela do Bairro</b><small>Padaria · Vila Nova</small></div>
+              <div class="prog"><span>Perfil preenchido</span><b data-wt="40,55,70,85,100">100%</b><div class="track"><i data-w="40,55,70,85,100"></i></div></div>
+              <ul class="checks">
+                <li class="dim" data-s="1">Categorias certas</li><li class="dim" data-s="2">Fotos novas</li>
+                <li class="dim" data-s="3">Horário e telefone</li><li class="dim" data-s="4">Avaliações respondidas</li>
+              </ul>
+            </div>
+            <div class="gmap k" data-s="5"><span class="pin"></span><span class="lbl">No mapa, com rota e telefone</span></div>
+            <div class="gacts"><span class="k" data-s="6">Ligar</span><span class="k" data-s="7">Rotas</span><span class="k" data-s="8">WhatsApp</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec band-g" id="portfolio">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Portfólio</p>
+        <h2>O que já saiu do ninho.</h2>
+        <p class="sub">Cada projeto com o problema, o que foi feito e o link pra ver funcionando.</p>
+        <span class="ex">projetos de exemplo · troque pelos seus</span>
+      </div>
+      <div class="filters" role="group" aria-label="Filtrar projetos">
+        <button type="button" data-f="todos" aria-pressed="true">Todos</button>
+        <button type="button" data-f="ia" aria-pressed="false">Agentes de IA</button>
+        <button type="button" data-f="soft" aria-pressed="false">Software</button>
+        <button type="button" data-f="site" aria-pressed="false">Sites</button>
+        <button type="button" data-f="google" aria-pressed="false">Google</button>
+      </div>
+      <div class="works" id="works">
+        <article class="work" data-c="ia">
+          <div class="cover k3"><div class="screen"><i></i><i></i><i></i><i></i></div></div>
+          <div class="info"><span class="kind">Agente de IA</span><h3>Atendimento no WhatsApp pra oficina</h3><p>Responde orçamento, marca horário e avisa a equipe.</p><p class="links"><span>Ver projeto →</span></p></div>
+        </article>
+        <article class="work" data-c="site">
+          <div class="cover k1"><div class="screen"><i></i><i></i><i></i><i></i></div></div>
+          <div class="info"><span class="kind">Landing page</span><h3>Matrículas de um estúdio de pilates</h3><p>Página de captação ligada à planilha da recepção.</p><p class="links"><span>Ver projeto →</span><span>Código</span></p></div>
+        </article>
+        <article class="work" data-c="soft">
+          <div class="cover k4"><div class="screen"><i></i><i></i><i></i><i></i></div></div>
+          <div class="info"><span class="kind">Software</span><h3>Painel de pedidos de uma distribuidora</h3><p>Do pedido à entrega numa tela só, no lugar de três planilhas.</p><p class="links"><span>Ver projeto →</span><span>Código</span></p></div>
+        </article>
+        <article class="work" data-c="google">
+          <div class="cover k2"><div class="screen"><i></i><i></i><i></i><i></i></div></div>
+          <div class="info"><span class="kind">Google</span><h3>Perfil no Google de uma padaria</h3><p>Cadastro refeito, fotos novas e rotina de resposta às avaliações.</p><p class="links"><span>Ver projeto →</span></p></div>
+        </article>
+        <article class="work" data-c="soft">
+          <div class="cover k6"><div class="screen"><i></i><i></i><i></i><i></i></div></div>
+          <div class="info"><span class="kind">Software</span><h3>Agenda online de um salão</h3><p>Cliente marca sozinho e recebe lembrete na véspera.</p><p class="links"><span>Ver projeto →</span><span>Código</span></p></div>
+        </article>
+        <article class="work" data-c="site">
+          <div class="cover k5"><div class="screen"><i></i><i></i><i></i><i></i></div></div>
+          <div class="info"><span class="kind">Site</span><h3>Lançamento de um loteamento</h3><p>Página com mapa dos lotes e formulário pro corretor.</p><p class="links"><span>Ver projeto →</span></p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec band-y" id="processo">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Como funciona</p>
+        <h2>Da conversa à entrega, em quatro etapas.</h2>
+      </div>
+      <ol class="steps">
+        <li><h3>Conversa</h3><p>Você conta o problema. A gente pergunta até entender o que resolve de verdade.</p></li>
+        <li><h3>Proposta</h3><p>Escopo, prazo e valor por escrito, antes de qualquer linha de código.</p></li>
+        <li><h3>Construção</h3><p>Você acompanha por um link de prévia e vai pedindo ajustes no caminho.</p></li>
+        <li><h3>Entrega</h3><p>No ar, testado, com o código na sua conta e um combinado de suporte.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec" id="contato">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Contato</p>
+        <h2>Conte o que você precisa.</h2>
+        <p class="sub">Marque as opções e a mensagem fica pronta ao lado. É só copiar e mandar.</p>
+      </div>
+      <div class="contact">
+        <form class="form" id="msg-form" autocomplete="off">
+          <fieldset class="field">
+            <legend>O que você procura</legend>
+            <div class="chips">
+              <label class="chip"><input type="checkbox" name="svc" id="s1" value="um agente de IA"><span>Agente de IA</span></label>
+              <label class="chip"><input type="checkbox" name="svc" id="s2" value="um software sob medida"><span>Software sob medida</span></label>
+              <label class="chip"><input type="checkbox" name="svc" id="s3" value="uma landing page ou site" checked><span>Landing page ou site</span></label>
+              <label class="chip"><input type="checkbox" name="svc" id="s4" value="otimização do perfil no Google"><span>Perfil no Google</span></label>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label for="negocio">Nome da empresa</label>
+            <input class="inp" id="negocio" name="negocio" type="text" maxlength="50" placeholder="Ex.: Auto Center Rota 9">
+          </div>
+          <div class="field">
+            <label for="ideia">Em uma frase, o que você quer resolver</label>
+            <textarea class="inp" id="ideia" name="ideia" rows="3" maxlength="240" placeholder="Ex.: perco cliente porque demoro a responder no WhatsApp"></textarea>
+          </div>
+        </form>
+        <div class="out">
+          <pre id="msg-text" aria-live="polite"></pre>
+          <div class="send">
+            <button class="btn go" type="button" id="copy">Copiar mensagem</button>
+            <span>e mande pra <code>contato@seudominio.dev</code></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec tight" id="duvidas">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Dúvidas</p>
+        <h2>Perguntas que sempre aparecem.</h2>
+      </div>
+      <div class="faq">
+        <details open>
+          <summary>O código fica comigo?</summary>
+          <p>Fica. O repositório é criado na sua conta do GitHub ou transferido pra ela na entrega. Você não fica preso a ninguém.</p>
+        </details>
+        <details>
+          <summary>O agente de IA responde qualquer coisa?</summary>
+          <p>Não. Ele responde com base no que a sua empresa informa, como preços, horários e regras. O que foge disso, ele passa pra uma pessoa da equipe.</p>
+        </details>
+        <details>
+          <summary>Preciso entender de tecnologia?</summary>
+          <p>Não. Você explica o negócio, a gente cuida da parte técnica e mostra na entrega como usar e como pedir mudanças.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="sete" aria-hidden="true"></div>
+<footer>
+  <div class="wrap">
+    <span><b>saíra</b> · sites, software e agentes de IA</span>
+    <span>O nome vem da saíra-sete-cores, ave da Mata Atlântica.</span>
+  </div>
+</footer>
+
+<!-- coruja-buraqueira: só aparece no modo escuro -->
+<div class="owl" id="owl" aria-hidden="true">
+  <svg viewBox="0 0 120 124">
+    <ellipse cx="74" cy="70" rx="30" ry="36" fill="#8A5A33"/>
+    <ellipse cx="74" cy="80" rx="20" ry="24" fill="#F3E3C3"/>
+    <path d="M60 74h28M58 84h32M62 94h24" stroke="#8A5A33" stroke-width="4" stroke-linecap="round"/>
+    <ellipse cx="74" cy="40" rx="32" ry="27" fill="#8A5A33"/>
+    <g fill="#F3E3C3"><circle cx="62" cy="19" r="2"/><circle cx="74" cy="16" r="2"/><circle cx="86" cy="19" r="2"/><circle cx="68" cy="24" r="1.6"/><circle cx="80" cy="24" r="1.6"/></g>
+    <path d="M47 29q14-9 25 4M101 29q-14-9-25 4" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <circle cx="60" cy="43" r="11.5" fill="#FFD400"/><circle class="pupil" cx="60" cy="43" r="5.5" fill="#0A2A1C"/>
+    <circle cx="88" cy="43" r="11.5" fill="#FFD400"/><circle class="pupil" cx="88" cy="43" r="5.5" fill="#0A2A1C"/>
+    <circle class="lid" cx="60" cy="43" r="12.2" fill="#7A4E2B"/>
+    <circle class="lid" cx="88" cy="43" r="12.2" fill="#7A4E2B"/>
+    <path d="M74 47l-5 9h10z" fill="#E9B04A"/>
+    <path d="M120 114H30q-8 0-8-5t8-5h90z" fill="#5E3B1E"/>
+    <path d="M48 104q-5-13-17-15" stroke="#5E3B1E" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <ellipse cx="27" cy="85" rx="10" ry="5" fill="#00A24A" transform="rotate(-28 27 85)"/>
+    <path d="M64 101v7M70 101v7M80 101v7M86 101v7" stroke="#E9B04A" stroke-width="3.5" stroke-linecap="round"/>
+  </svg>
+</div>
+</body>
+</html>
