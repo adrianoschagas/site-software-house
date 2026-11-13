@@ -215,8 +215,9 @@ export function initForest(hero, canvas, countEl) {
   // ponteiro
   const ndc = new THREE.Vector2(0.3, 0), ray = new THREE.Raycaster();
   const flight = new THREE.Plane(new THREE.Vector3(0, 1, 0), -11), hit = new THREE.Vector3();
-  const target = new THREE.Vector3(12, 0, -4), vel = new THREE.Vector3(), par = new THREE.Vector2();
-  let active = false, idle = null, yaw = 0, planted = 0, clock = 0, nightT = 0, nightK = 0;
+  const target = new THREE.Vector3(12, 0, -4), vel = new THREE.Vector3(), par = new THREE.Vector2(), cursor = new THREE.Vector3();
+  const KEEP = 13;                       // distância lateral que o helicóptero mantém do cursor
+  let side = 1, active = false, idle = null, yaw = 0, planted = 0, clock = 0, nightT = 0, nightK = 0;
   function setNdc(e) {
     const r = canvas.getBoundingClientRect();
     ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
@@ -268,21 +269,30 @@ export function initForest(hero, canvas, countEl) {
 
   function step(t, dt) {
     // alvo: cursor projetado na altura de voo, ou um passeio sozinho
+    const hp = heli.position;
+    let watching = false;
     if (active) {
       ray.setFromCamera(ndc, camera);
-      if (ray.ray.intersectPlane(flight, hit)) target.set(clamp(hit.x, -62, 62), 0, clamp(hit.z, -36, 24));
+      if (ray.ray.intersectPlane(flight, hit)) {
+        // acompanha de lado, a uma distância fixa: nunca fica em cima do cursor
+        const cx = clamp(hit.x, -62, 62), cz = clamp(hit.z, -36, 24);
+        if (Math.abs(cx + side * KEEP) > 62) side = -side;
+        else if (Math.abs(hp.x - cx) > KEEP * 0.4) side = hp.x > cx ? 1 : -1;
+        target.set(cx + side * KEEP, 0, clamp(cz - 4, -36, 24));
+        cursor.set(cx, 0, cz); watching = true;
+      }
     } else target.set(10 + 22 * Math.sin(t * 0.22), 0, -7 + 11 * Math.sin(t * 0.44));
 
-    const hp = heli.position;
-    vel.x += ((target.x - hp.x) * 6 - vel.x * 4.2) * dt;
-    vel.z += ((target.z - hp.z) * 6 - vel.z * 4.2) * dt;
+    vel.x += ((target.x - hp.x) * 3.6 - vel.x * 3.4) * dt;
+    vel.z += ((target.z - hp.z) * 3.6 - vel.z * 3.4) * dt;
     hp.x += vel.x * dt; hp.z += vel.z * dt;
     const gh = Math.max(0, ground(hp.x, hp.z));
     hp.y = 11 + gh * 0.55 + Math.sin(t * 2) * 0.25;
     const speed = Math.sqrt(vel.x * vel.x + vel.z * vel.z);
     let turn = 0;
-    if (speed > 0.8) {
-      const want = Math.atan2(-vel.z, vel.x);
+    if (speed > 1.6 || watching) {
+      // voando, aponta pra onde vai; parado ao lado do cursor, vira o nariz pra ele
+      const want = speed > 1.6 ? Math.atan2(-vel.z, vel.x) : Math.atan2(-(cursor.z - hp.z), cursor.x - hp.x);
       turn = Math.atan2(Math.sin(want - yaw), Math.cos(want - yaw));
       yaw += turn * (1 - Math.exp(-6 * dt));
     }
