@@ -237,7 +237,14 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance}
 .work h3{font-weight:800;font-size:1.25rem;line-height:1.12;letter-spacing:-.01em}
 .work p{color:var(--muted);font-size:.95rem}
 .work .links{display:flex;gap:16px;margin-top:6px;font-size:14px;font-weight:700;color:var(--ink)}
-.work .links span{border-bottom:3px solid var(--yellow)}
+.work .links span,.work .links a{border-bottom:3px solid var(--yellow);text-decoration:none}
+/* projeto em destaque: captura real do site ao lado do texto */
+.work.feat{grid-column:span 2;flex-direction:row}
+.work.feat .cover{position:relative;flex:1.2 1 0;min-width:0;min-height:300px;aspect-ratio:auto;padding:0;background:#FBF7F6}
+.cover.shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:left center}
+.work.feat .info{flex:1 1 0;min-width:0;align-content:center;padding:28px;gap:10px}
+.work.feat h3{font-size:1.7rem;line-height:1.05}
+.work.feat:hover{transform:translateY(-5px)}
 
 /* etapas */
 .steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;counter-reset:s}
@@ -307,6 +314,9 @@ footer b{color:var(--band-g-ink)}
   .hero-in{height:auto;align-items:flex-start;padding-block:34px 0}
   .hud{left:max(16px,env(safe-area-inset-left,0px));right:auto;bottom:14px}
   .works,.steps{grid-template-columns:minmax(0,1fr)}
+  .work.feat{grid-column:auto;flex-direction:column}
+  .work.feat .cover{flex:none;min-height:0;aspect-ratio:13/10}
+  .work.feat .info{padding:18px 20px 20px}
   .win{box-shadow:6px 6px 0 var(--c)}
   .wtag{display:none}
   #again{margin-left:auto}
